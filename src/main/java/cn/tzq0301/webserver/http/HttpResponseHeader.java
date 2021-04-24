@@ -14,14 +14,14 @@ public class HttpResponseHeader implements Header {
     private final HttpVersion version;
     private final int code;
     private final String message;
+    private final Map<String, String> headerFields = new HashMap<>();
+
 
     public HttpResponseHeader(HttpVersion version, HttpStatusCode httpStatusCode) {
         this.version = version;
         this.code = httpStatusCode.getCode();
         this.message = httpStatusCode.getMessage();
     }
-
-    private final Map<String, String> headerFields = new HashMap<>();
 
     public HttpVersion getVersion() {
         return version;
@@ -47,5 +47,17 @@ public class HttpResponseHeader implements Header {
 
     public void setAttribute(String attribute, String value) {
         headerFields.put(attribute, value);
+    }
+
+    public void setAttribute(HttpResponseHeaderAttribute attribute, String value) {
+        setAttribute(attribute.attributeName, value);
+    }
+
+    public void setContentType(String contentType) {
+        setAttribute(HttpResponseHeaderAttribute.ContentType, contentType);
+    }
+
+    public void setContentLength(int contentLength) {
+        setAttribute(HttpResponseHeaderAttribute.ContentLength, String.valueOf(contentLength));
     }
 }

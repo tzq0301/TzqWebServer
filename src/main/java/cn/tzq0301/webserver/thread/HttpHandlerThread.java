@@ -1,15 +1,15 @@
 package cn.tzq0301.webserver.thread;
 
-import cn.tzq0301.webserver.handler.HttpRequestHandler;
+import cn.tzq0301.webserver.handler.Dispatcher;
 import cn.tzq0301.webserver.http.HttpResponse;
 import cn.tzq0301.webserver.resolver.HttpRequestResolver;
 import cn.tzq0301.webserver.http.HttpRequest;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Arrays;
 
 /**
  * @author TZQ
@@ -28,8 +28,11 @@ public class HttpHandlerThread implements Runnable {
              final OutputStream outputStream = socket.getOutputStream()) {
             byte[] bytes = new byte[1024 * 16];
             int len = inputStream.read(bytes);
+
             final HttpRequest httpRequest = HttpRequestResolver.resolve(bytes, len);
-            final HttpResponse httpResponse = HttpRequestHandler.handle(httpRequest);
+
+            final HttpResponse httpResponse = Dispatcher.handle(httpRequest);
+
             outputStream.write(httpResponse.toMessage());
         } catch (IOException e) {
             e.printStackTrace();
