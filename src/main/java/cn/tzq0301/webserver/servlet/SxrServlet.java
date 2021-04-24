@@ -2,6 +2,7 @@ package cn.tzq0301.webserver.servlet;
 
 import cn.hutool.core.io.file.FileReader;
 import cn.tzq0301.webserver.http.*;
+import cn.tzq0301.webserver.util.TzqFileUtils;
 
 
 /**
@@ -13,8 +14,7 @@ public class SxrServlet implements Servlet {
     public HttpResponse handleGET(HttpRequest request) {
         HttpResponseHeader header = new HttpResponseHeader(request.getRequestHeader().getHttpVersion(), HttpStatusCode.OK);
         header.setContentType("image/jpeg");
-        FileReader fileReader = new FileReader("static/img/sxr.jpg");
-        final byte[] bytes = fileReader.readBytes();
+        final byte[] bytes = TzqFileUtils.classPathResourceToByteArray("static/img/sxr.jpg");
         header.setContentLength(bytes.length);
         HttpEntityBody body = new HttpEntityBody(bytes);
         return new HttpResponse(header, body);

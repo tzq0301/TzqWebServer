@@ -1,6 +1,5 @@
 package cn.tzq0301.webserver.http;
 
-import cn.tzq0301.webserver.util.HttpUtils;
 import cn.tzq0301.webserver.web.Header;
 
 import java.util.HashMap;

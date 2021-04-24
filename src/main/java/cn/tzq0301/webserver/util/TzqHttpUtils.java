@@ -11,7 +11,7 @@ import java.util.Map;
  * @author TZQ
  * @Description TODO
  */
-public final class HttpUtils {
+public final class TzqHttpUtils {
     private static final Map<String, HttpVersion> httpVersionMap;
     private static final Map<String, HttpRequestMethod> httpRequestMethodMap;
 

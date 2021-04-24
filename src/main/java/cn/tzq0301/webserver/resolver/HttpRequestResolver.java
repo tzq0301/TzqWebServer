@@ -3,7 +3,7 @@ package cn.tzq0301.webserver.resolver;
 import cn.tzq0301.webserver.http.HttpEntityBody;
 import cn.tzq0301.webserver.http.HttpRequest;
 import cn.tzq0301.webserver.http.HttpRequestHeader;
-import cn.tzq0301.webserver.util.HttpUtils;
+import cn.tzq0301.webserver.util.TzqHttpUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -36,8 +36,8 @@ public class HttpRequestResolver {
         }
 
         String[] headerLine = strings[0].split(SPACE);
-        HttpRequestHeader header = new HttpRequestHeader(HttpUtils.getHttpRequestMethod(headerLine[0]),
-                headerLine[1], HttpUtils.getHttpVersion(headerLine[2]), headerFields);
+        HttpRequestHeader header = new HttpRequestHeader(TzqHttpUtils.getHttpRequestMethod(headerLine[0]),
+                headerLine[1], TzqHttpUtils.getHttpVersion(headerLine[2]), headerFields);
 
         return new HttpRequest(header, body);
     }
