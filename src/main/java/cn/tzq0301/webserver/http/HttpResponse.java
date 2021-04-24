@@ -1,5 +1,6 @@
 package cn.tzq0301.webserver.http;
 
+import cn.hutool.core.util.ArrayUtil;
 import cn.tzq0301.webserver.web.EntityBody;
 import cn.tzq0301.webserver.web.Header;
 import cn.tzq0301.webserver.web.Response;
@@ -46,11 +47,6 @@ public class HttpResponse implements Response {
         header.getAttributes().forEach((k, v) -> stringBuilder.append(k).append(": ").append(v).append(CRLF));
         stringBuilder.append(CRLF);
 
-        byte[] b1 = stringBuilder.toString().getBytes(StandardCharsets.UTF_8);
-        byte[] message = new byte[b1.length + body.getContent().length];
-        System.arraycopy(b1, 0, message, 0, b1.length);
-        System.arraycopy(body.getContent(), 0, message, b1.length, body.getContent().length);
-
-        return message;
+        return ArrayUtil.addAll(stringBuilder.toString().getBytes(StandardCharsets.UTF_8), body.getContent());
     }
 }
