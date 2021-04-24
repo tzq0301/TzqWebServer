@@ -1,7 +1,7 @@
 package cn.tzq0301.webserver.web;
 
 public interface EntityBody {
-    String getContent();
+    byte[] getContent();
 
-    void setContent(String content);
+    void setContent(byte[] content);
 }

@@ -7,19 +7,19 @@ import cn.tzq0301.webserver.web.EntityBody;
  * @Description TODO
  */
 public class HttpEntityBody implements EntityBody {
-    private String content;
+    private byte[] content;
 
-    public HttpEntityBody(String content) {
+    public HttpEntityBody(byte[] content) {
         this.content = content;
     }
 
     @Override
-    public String getContent() {
+    public byte[] getContent() {
         return content;
     }
 
     @Override
-    public void setContent(String content) {
+    public void setContent(byte[] content) {
         this.content = content;
     }
 }

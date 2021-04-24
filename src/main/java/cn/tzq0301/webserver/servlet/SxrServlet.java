@@ -12,11 +12,11 @@ public class SxrServlet implements Servlet {
     @Override
     public HttpResponse handleGET(HttpRequest request) {
         HttpResponseHeader header = new HttpResponseHeader(request.getRequestHeader().getHttpVersion(), HttpStatusCode.OK);
-        header.setContentType("image/jpeg");
+        // header.setContentType("image/jpeg");
         FileReader fileReader = new FileReader("static/img/sxr.jpg");
         final byte[] bytes = fileReader.readBytes();
-        header.setContentLength(bytes.length);
-        HttpEntityBody body = new HttpEntityBody(new String(bytes));
+        // header.setContentLength(bytes.length);
+        HttpEntityBody body = new HttpEntityBody(bytes);
         return new HttpResponse(header, body);
     }
 

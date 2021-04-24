@@ -2,10 +2,6 @@ package cn.tzq0301.webserver.servlet;
 
 import cn.hutool.core.io.file.FileReader;
 import cn.tzq0301.webserver.http.*;
-import org.springframework.core.io.ClassPathResource;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * @author TZQ
@@ -17,7 +13,7 @@ public class IndexServlet implements Servlet {
         HttpResponseHeader header = new HttpResponseHeader(request.getRequestHeader().getHttpVersion(), HttpStatusCode.OK);
         FileReader fileReader = new FileReader("static/index.html");
         final byte[] bytes = fileReader.readBytes();
-        HttpEntityBody body = new HttpEntityBody(new String(bytes));
+        HttpEntityBody body = new HttpEntityBody(bytes);
         return new HttpResponse(header, body);
     }
 

@@ -5,6 +5,7 @@ import cn.tzq0301.webserver.web.Header;
 import cn.tzq0301.webserver.web.Response;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 /**
  * @author TZQ
@@ -43,7 +44,13 @@ public class HttpResponse implements Response {
                 .append(header.getCode()).append(SPACE)
                 .append(header.getMessage()).append(CRLF);
         header.getAttributes().forEach((k, v) -> stringBuilder.append(k).append(": ").append(v).append(CRLF));
-        stringBuilder.append(CRLF).append(body.getContent());
-        return stringBuilder.toString().getBytes(StandardCharsets.UTF_8);
+        stringBuilder.append(CRLF);
+
+        byte[] b1 = stringBuilder.toString().getBytes(StandardCharsets.UTF_8);
+        byte[] message = new byte[b1.length + body.getContent().length];
+        System.arraycopy(b1, 0, message, 0, b1.length);
+        System.arraycopy(body.getContent(), 0, message, b1.length, body.getContent().length);
+
+        return message;
     }
 }

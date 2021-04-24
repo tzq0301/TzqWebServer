@@ -5,6 +5,7 @@ import cn.tzq0301.webserver.http.HttpRequest;
 import cn.tzq0301.webserver.http.HttpRequestHeader;
 import cn.tzq0301.webserver.util.HttpUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +22,8 @@ public class HttpRequestResolver {
         String message = new String(bytes, 0, len);
 
         int startOfBlankLine = message.indexOf(CRLFCRLF);
-        HttpEntityBody body = new HttpEntityBody(message.substring(startOfBlankLine + CRLFCRLF.length()));
+        HttpEntityBody body = new HttpEntityBody(
+                message.substring(startOfBlankLine + CRLFCRLF.length()).getBytes(StandardCharsets.UTF_8));
 
         String[] strings = message.split("\\r\\n");
 
