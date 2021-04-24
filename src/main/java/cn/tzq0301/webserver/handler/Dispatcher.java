@@ -3,6 +3,7 @@ package cn.tzq0301.webserver.handler;
 import cn.tzq0301.webserver.http.HttpRequest;
 import cn.tzq0301.webserver.http.HttpRequestMethod;
 import cn.tzq0301.webserver.http.HttpResponse;
+import cn.tzq0301.webserver.servlet.IndexCssServlet;
 import cn.tzq0301.webserver.servlet.IndexServlet;
 import cn.tzq0301.webserver.servlet.Servlet;
 import cn.tzq0301.webserver.servlet.SxrServlet;
@@ -23,6 +24,7 @@ public class Dispatcher {
 
         tmp.put("/index", new IndexServlet());
         tmp.put("/img/sxr.jpg", new SxrServlet());
+        tmp.put("/css/index.css", new IndexCssServlet());
 
         requestMap = Collections.unmodifiableMap(tmp);
     }
